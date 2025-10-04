@@ -5,7 +5,7 @@
 - по изменению цены уведомление в телеграм?
 - деплой в Docker
 
-
+```
 ozon-price-tracker/
 ├── docker-compose.yml
 ├── .env
@@ -41,3 +41,4 @@ ozon-price-tracker/
 │       └── go.mod
 └── scripts/
     └── init-db.sql
+```
