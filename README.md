@@ -42,3 +42,4 @@ ozon-price-tracker/
 └── scripts/
     └── init-db.sql
 ```
+- для парсинга использовать Colly
