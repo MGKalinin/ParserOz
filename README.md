@@ -45,4 +45,5 @@ ozon-price-tracker/
 └── scripts/
     └── init-db.sql
 ```
-- для парсинга использовать Selenium/Webdriver client for Go ( [github.com/tebeka/selenium](https://github.com/tebeka/selenium) , [Selenium in Golang: Step-by-Step Tutorial 2025](https://www.zenrows.com/blog/selenium-golang#why-use-selenium-in-go) )
+- [Selenium in Golang: Step-by-Step Tutorial 2025](https://www.zenrows.com/blog/selenium-golang#why-use-selenium-in-go) 
+- [Web Scraping in Golang: 2025 Complete Guide](https://www.zenrows.com/blog/web-scraping-golang#build-first-golang-scraper)
