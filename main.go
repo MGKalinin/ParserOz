@@ -2,65 +2,35 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"time"
 
-	"github.com/tebeka/selenium"
+	"github.com/gocolly/colly"
 )
 
+// Product data structure to keep the scraped data
+type Product struct {
+	Price string
+}
+
 func main() {
-	const (
-		seleniumPath = "/opt/homebrew/bin/chromedriver"
-		port         = 4444
-	)
+	// initialize the slice of structs that will contain the scraped data
+	var products []Product
+	// instantiate a new collector object
+	c := colly.NewCollector()
+	// OnHTML callback
+	c.OnHTML("body", func(e *colly.HTMLElement) {
+		// initialize a new Product instance
+		product := Product{}
+		// scrape the target data
+		product.Price = e.ChildText("/html/body/div[2]/main/div[2]/div[1]/div/div[2]/div/div[3]/div[3]/div/div[1]/div[1]/div/div/div/div/div/span/ins")
 
-	// Запускаем ChromeDriver сервер
-	service, err := selenium.NewChromeDriverService(seleniumPath, port)
-	if err != nil {
-		log.Fatal("❌ Ошибка запуска ChromeDriver:", err)
+		// add the product instance with scraped data to the list of products
+		products = append(products, product)
+
+	})
+	// open the target URL
+	c.Visit("https://www.wildberries.ru/catalog/75455564/detail.aspx")
+	// Print results
+	for _, product := range products {
+		fmt.Printf("Price: %s\n", product.Price)
 	}
-	defer service.Stop()
-
-	fmt.Println("✅ ChromeDriver сервер запущен")
-
-	// Простые настройки без сложных опций
-	caps := selenium.Capabilities{"browserName": "chrome"}
-
-	// Подключаемся к WebDriver
-	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
-	if err != nil {
-		log.Fatal("❌ Ошибка подключения к WebDriver:", err)
-	}
-	defer wd.Quit()
-
-	fmt.Println("✅ Браузер запущен")
-
-	// Переходим на страницу
-	url := "https://www.ozon.ru/product/muzhskie-naruchnye-chasy-casio-g-shock-gw-9400-1er-2058384940/"
-	fmt.Printf("🌐 Загружаем страницу: %s\n", url)
-
-	err = wd.Get(url)
-	if err != nil {
-		log.Fatal("❌ Ошибка загрузки страницы:", err)
-	}
-
-	// Ждем загрузки
-	fmt.Println("⏳ Ожидаем загрузки страницы...")
-	time.Sleep(5 * time.Second)
-
-	// Получаем цену с надежным селектором
-	fmt.Println("🔍 Ищем цену...")
-	price, err := wd.FindElement(selenium.ByCSSSelector, "span[data-widget='webPrice']")
-	if err != nil {
-		log.Fatal("❌ Не удалось найти элемент цены:", err)
-	}
-
-	// Получаем текст цены
-	priceText, err := price.Text()
-	if err != nil {
-		log.Fatal("❌ Не удалось получить текст цены:", err)
-	}
-
-	fmt.Printf("\n🎯 ЦЕНА НАЙДЕНА: %s\n", priceText)
-	fmt.Printf("📎 URL товара: %s\n", url)
 }
