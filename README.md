@@ -8,42 +8,6 @@
 - по изменению цены уведомление в телеграм?
 - деплой в Docker
 
-```
-ozon-price-tracker/
-├── docker-compose.yml
-├── .env
-├── go.mod
-├── pkg/
-│   ├── parser/              # Сервис парсинга
-│   │   ├── Dockerfile
-│   │   ├── cmd/
-│   │   │   └── main.go
-│   │   ├── internal/
-│   │   │   ├── parser/
-│   │   │   │   └── ozon_parser.go
-│   │   │   ├── kafka/
-│   │   │   │   └── producer.go
-│   │   │   └── config/
-│   │   │       └── config.go
-│   │   └── go.mod
-│   ├── storage/             # Сервис сохранения в БД
-│   │   ├── Dockerfile
-│   │   ├── cmd/
-│   │   │   └── main.go
-│   │   ├── internal/
-│   │   │   ├── repository/
-│   │   │   │   └── price_repo.go
-│   │   │   ├── kafka/
-│   │   │   │   └── consumer.go
-│   │   │   └── config/
-│   │   │       └── config.go
-│   │   └── go.mod
-│   └── common/              # Общие утилиты
-│       ├── types/
-│       │   └── price.go
-│       └── go.mod
-└── scripts/
-    └── init-db.sql
-```
-- [Selenium in Golang: Step-by-Step Tutorial 2025](https://www.zenrows.com/blog/selenium-golang#why-use-selenium-in-go) 
-- [Web Scraping in Golang: 2025 Complete Guide](https://www.zenrows.com/blog/web-scraping-golang#build-first-golang-scraper)
+1. [Selenium in Golang: Step-by-Step Tutorial 2025](https://www.zenrows.com/blog/selenium-golang#why-use-selenium-in-go) 
+2. [Web Scraping in Golang: 2025 Complete Guide](https://www.zenrows.com/blog/web-scraping-golang#build-first-golang-scraper)
+3. [Playwright in Golang for Web Scraping [Tutorial 2025]](https://www.zenrows.com/blog/playwright-golang)
